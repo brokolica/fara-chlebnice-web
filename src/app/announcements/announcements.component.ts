@@ -16,10 +16,10 @@ export class AnnouncementsComponent {
 
   getAnnouncements() {
     this.announcementService.getAnnouncements().subscribe({
-      next(data){
-        console.log(data);
+      next: (data) => {
+        this.announcements = data;
       },
-      error(msg) {
+      error: (msg) => {
         console.log('Error Getting Location: ', msg);
       }
     });
