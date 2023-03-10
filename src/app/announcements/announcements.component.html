@@ -3,3 +3,16 @@
 <button (click)="getAnnouncements()">CLICK ME!</button>
 
 <div>{{ announcements }}</div>
+
+<table>
+    <thead>
+        <th>Title</th>
+        <th>Text</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let ann of announcements">
+            <td>{{ann.title}}</td>
+            <td>{{ann.text}}</td>
+        </tr>
+    </tbody>
+</table>
