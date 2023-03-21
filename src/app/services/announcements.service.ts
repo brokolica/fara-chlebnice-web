@@ -2,25 +2,37 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Announcement } from '../model/announcement';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementsService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
-  private configUrl = 'https://fara-chlebnice-lc3g8.ondigitalocean.app/api/Announcements'; // 'https://localhost:7112/api/Announcements';
+  private configUrl = 'https://fara-chlebnice-lc3g8.ondigitalocean.app/api/Announcements'; // 'https://localhost:7112/Announcements';
 
   getAnnouncements(): Observable<Announcement[]> {
     return this.http.get<Announcement[]>(this.configUrl);
   }
 
   createAnnouncement(data: Announcement): Observable<Announcement> {
-    return this.http.post<Announcement>(this.configUrl, data)
-      .pipe(
-        catchError(this.handleError)
-      );
+    return this.auth.getAccessTokenSilently({
+      authorizationParams: {
+        audience: "https://fara-chlebnice-lc3g8.ondigitalocean.app/api/"
+      }
+    }).pipe(switchMap(token => {
+      return this.http.post<Announcement>(this.configUrl, data,
+        {
+          headers: {
+            "Authorization": 'Bearer ' + token
+          }
+        })
+        .pipe(
+          catchError(this.handleError)
+        );
+    }));
   }
 
   private handleError(error: HttpErrorResponse) {
