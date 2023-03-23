@@ -10,11 +10,13 @@ import { DOCUMENT } from '@angular/common';
 export class AuthButtonComponent {
   constructor(@Inject(DOCUMENT) public document: Document, public auth: AuthService) { }
 
-  public loginWithRedirect() {
-    this.auth.loginWithRedirect({
-      authorizationParams: {
-        audience: "https://fara-chlebnice-lc3g8.ondigitalocean.app/api/"
-      }
-    });
-  }
+  // public loginWithRedirect() {
+  //   this.auth.loginWithPopup({
+  //     authorizationParams: {
+  //       audience: "https://fara-chlebnice-lc3g8.ondigitalocean.app/api/",
+  //       ui_locales: 'sk',
+  //       redirect_uri: window.location.origin + '/administration'
+  //     }
+  //   });
+  // }
 }
