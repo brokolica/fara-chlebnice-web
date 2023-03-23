@@ -12,7 +12,7 @@ export class AnnouncementsService {
   constructor(private http: HttpClient, private auth: AuthService) { }
 
   private configUrl = 'https://fara-chlebnice-lc3g8.ondigitalocean.app/api/Announcements'; // 'https://localhost:7112/Announcements';
-
+  
   getAnnouncements(): Observable<Announcement[]> {
     return this.http.get<Announcement[]>(this.configUrl);
   }

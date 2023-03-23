@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from '@auth0/auth0-angular';
 import { AuthButtonComponent } from './authorization/auth-button/auth-button.component';
 import { UserProfileComponent } from './authorization/user-profile/user-profile.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserProfileComponent } from './authorization/user-profile/user-profile.
     AnnouncementsComponent,
     AboutComponent,
     AuthButtonComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AdministrationComponent
   ],
   imports: [
     AuthModule.forRoot({
